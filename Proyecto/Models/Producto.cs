@@ -6,7 +6,7 @@ namespace Proyecto.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "El campo de el Nombre debe ser obligatorio")]
+        [Required(ErrorMessage = "este campo de el Nombre debe ser obligatorio")]
         public string Nombre { get; set; }
         public decimal PrecioCosto { get; set; }
         public decimal PrecioVenta { get; set; }
