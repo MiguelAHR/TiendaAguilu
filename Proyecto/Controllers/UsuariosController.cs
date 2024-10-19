@@ -10,23 +10,23 @@ using Proyecto.Models;
 
 namespace Proyecto.Controllers
 {
-    public class ProductosController : Controller
+    public class UsuariosController : Controller
     {
         private readonly ProyectoContext _context;
 
-        public ProductosController(ProyectoContext context)
+        public UsuariosController(ProyectoContext context)
         {
             _context = context;
         }
 
-        // GET: Productos
+        // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-            var proyectoContext = _context.Productos.Include(p => p.Categoria).Include(p => p.Proveedor);
+            var proyectoContext = _context.Usuarios.Include(u => u.Persona).Include(u => u.Rol);
             return View(await proyectoContext.ToListAsync());
         }
 
-        // GET: Productos/Details/5
+        // GET: Usuarios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,45 +34,47 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var producto = await _context.Productos
-                .Include(p => p.Categoria)
-                .Include(p => p.Proveedor)
+            var usuario = await _context.Usuarios
+                .Include(u => u.Persona)
+                .Include(u => u.Rol)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (producto == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return View(producto);
+            return View(usuario);
         }
 
-        // GET: Productos/Create
+        // GET: Usuarios/Create
         public IActionResult Create()
         {
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Nombre");
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Nombre");
+            ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "Nombre");
+            ViewData["RolId"] = new SelectList(_context.Roles, "Id", "Nombre");
             return View();
         }
 
-        // POST: Productos/Create
+        // POST: Usuarios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,PrecioCosto,PrecioVenta,Descripcion,FechaCreacion,Cantidad,CategoriaId,ProveedorId")] Producto producto)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Contraseña,RolId,PersonaId")] Usuario usuario)
         {
+            ModelState.Remove("Rol");
+            ModelState.Remove("Persona");
             if (ModelState.IsValid)
             {
-                _context.Add(producto);
+                _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Id", producto.CategoriaId);
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Id", producto.ProveedorId);
-            return View(producto);
+            ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "Nombre", usuario.PersonaId);
+            ViewData["RolId"] = new SelectList(_context.Roles, "Id", "Nombre", usuario.RolId);
+            return View(usuario);
         }
 
-        // GET: Productos/Edit/5
+        // GET: Usuarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,24 +82,24 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var producto = await _context.Productos.FindAsync(id);
-            if (producto == null)
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario == null)
             {
                 return NotFound();
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Id", producto.CategoriaId);
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Id", producto.ProveedorId);
-            return View(producto);
+            ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "Nombre", usuario.PersonaId);
+            ViewData["RolId"] = new SelectList(_context.Roles, "Id", "Nombre", usuario.RolId);
+            return View(usuario);
         }
 
-        // POST: Productos/Edit/5
+        // POST: Usuarios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,PrecioCosto,PrecioVenta,Descripcion,FechaCreacion,Cantidad,CategoriaId,ProveedorId")] Producto producto)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Contraseña,RolId,PersonaId")] Usuario usuario)
         {
-            if (id != producto.Id)
+            if (id != usuario.Id)
             {
                 return NotFound();
             }
@@ -106,12 +108,12 @@ namespace Proyecto.Controllers
             {
                 try
                 {
-                    _context.Update(producto);
+                    _context.Update(usuario);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductoExists(producto.Id))
+                    if (!UsuarioExists(usuario.Id))
                     {
                         return NotFound();
                     }
@@ -122,12 +124,12 @@ namespace Proyecto.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Id", producto.CategoriaId);
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Id", producto.ProveedorId);
-            return View(producto);
+            ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "Nombre", usuario.PersonaId);
+            ViewData["RolId"] = new SelectList(_context.Roles, "Id", "Nombre", usuario.RolId);
+            return View(usuario);
         }
 
-        // GET: Productos/Delete/5
+        // GET: Usuarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,36 +137,36 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var producto = await _context.Productos
-                .Include(p => p.Categoria)
-                .Include(p => p.Proveedor)
+            var usuario = await _context.Usuarios
+                .Include(u => u.Persona)
+                .Include(u => u.Rol)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (producto == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return View(producto);
+            return View(usuario);
         }
 
-        // POST: Productos/Delete/5
+        // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var producto = await _context.Productos.FindAsync(id);
-            if (producto != null)
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario != null)
             {
-                _context.Productos.Remove(producto);
+                _context.Usuarios.Remove(usuario);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductoExists(int id)
+        private bool UsuarioExists(int id)
         {
-            return _context.Productos.Any(e => e.Id == id);
+            return _context.Usuarios.Any(e => e.Id == id);
         }
     }
 }

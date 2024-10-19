@@ -10,22 +10,22 @@ using Proyecto.Models;
 
 namespace Proyecto.Controllers
 {
-    public class ProveedoresController : Controller
+    public class PersonasController : Controller
     {
         private readonly ProyectoContext _context;
 
-        public ProveedoresController(ProyectoContext context)
+        public PersonasController(ProyectoContext context)
         {
             _context = context;
         }
 
-        // GET: Proveedores
+        // GET: Personas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Proveedor.ToListAsync());
+            return View(await _context.Personas.ToListAsync());
         }
 
-        // GET: Proveedores/Details/5
+        // GET: Personas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var proveedor = await _context.Proveedor
+            var persona = await _context.Personas
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (proveedor == null)
+            if (persona == null)
             {
                 return NotFound();
             }
 
-            return View(proveedor);
+            return View(persona);
         }
 
-        // GET: Proveedores/Create
+        // GET: Personas/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Proveedores/Create
+        // POST: Personas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Telefono,Email")] Proveedor proveedor)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Dni,FechaNacimiento,Telefono,Direccion")] Persona persona)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(proveedor);
+                _context.Add(persona);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(proveedor);
+            return View(persona);
         }
 
-        // GET: Proveedores/Edit/5
+        // GET: Personas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var proveedor = await _context.Proveedor.FindAsync(id);
-            if (proveedor == null)
+            var persona = await _context.Personas.FindAsync(id);
+            if (persona == null)
             {
                 return NotFound();
             }
-            return View(proveedor);
+            return View(persona);
         }
 
-        // POST: Proveedores/Edit/5
+        // POST: Personas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Telefono,Email")] Proveedor proveedor)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Dni,FechaNacimiento,Telefono,Direccion")] Persona persona)
         {
-            if (id != proveedor.Id)
+            if (id != persona.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Proyecto.Controllers
             {
                 try
                 {
-                    _context.Update(proveedor);
+                    _context.Update(persona);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProveedorExists(proveedor.Id))
+                    if (!PersonaExists(persona.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace Proyecto.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(proveedor);
+            return View(persona);
         }
 
-        // GET: Proveedores/Delete/5
+        // GET: Personas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +124,34 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var proveedor = await _context.Proveedor
+            var persona = await _context.Personas
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (proveedor == null)
+            if (persona == null)
             {
                 return NotFound();
             }
 
-            return View(proveedor);
+            return View(persona);
         }
 
-        // POST: Proveedores/Delete/5
+        // POST: Personas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var proveedor = await _context.Proveedor.FindAsync(id);
-            if (proveedor != null)
+            var persona = await _context.Personas.FindAsync(id);
+            if (persona != null)
             {
-                _context.Proveedor.Remove(proveedor);
+                _context.Personas.Remove(persona);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProveedorExists(int id)
+        private bool PersonaExists(int id)
         {
-            return _context.Proveedor.Any(e => e.Id == id);
+            return _context.Personas.Any(e => e.Id == id);
         }
     }
 }

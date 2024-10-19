@@ -10,23 +10,23 @@ using Proyecto.Models;
 
 namespace Proyecto.Controllers
 {
-    public class ProductosController : Controller
+    public class AuxiliarAlmacensController : Controller
     {
         private readonly ProyectoContext _context;
 
-        public ProductosController(ProyectoContext context)
+        public AuxiliarAlmacensController(ProyectoContext context)
         {
             _context = context;
         }
 
-        // GET: Productos
+        // GET: AuxiliarAlmacens
         public async Task<IActionResult> Index()
         {
-            var proyectoContext = _context.Productos.Include(p => p.Categoria).Include(p => p.Proveedor);
+            var proyectoContext = _context.AuxiliarAlmacen.Include(a => a.Usuario);
             return View(await proyectoContext.ToListAsync());
         }
 
-        // GET: Productos/Details/5
+        // GET: AuxiliarAlmacens/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,45 +34,43 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var producto = await _context.Productos
-                .Include(p => p.Categoria)
-                .Include(p => p.Proveedor)
+            var auxiliarAlmacen = await _context.AuxiliarAlmacen
+                .Include(a => a.Usuario)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (producto == null)
+            if (auxiliarAlmacen == null)
             {
                 return NotFound();
             }
 
-            return View(producto);
+            return View(auxiliarAlmacen);
         }
 
-        // GET: Productos/Create
+        // GET: AuxiliarAlmacens/Create
         public IActionResult Create()
         {
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Nombre");
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Nombre");
+            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre");
             return View();
         }
 
-        // POST: Productos/Create
+        // POST: AuxiliarAlmacens/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,PrecioCosto,PrecioVenta,Descripcion,FechaCreacion,Cantidad,CategoriaId,ProveedorId")] Producto producto)
+        public async Task<IActionResult> Create([Bind("Id,UsuarioId,Credencial")] AuxiliarAlmacen auxiliarAlmacen)
         {
+            ModelState.Remove("Usuario");
             if (ModelState.IsValid)
             {
-                _context.Add(producto);
+                _context.Add(auxiliarAlmacen);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Id", producto.CategoriaId);
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Id", producto.ProveedorId);
-            return View(producto);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre", auxiliarAlmacen.UsuarioId);
+            return View(auxiliarAlmacen);
         }
 
-        // GET: Productos/Edit/5
+        // GET: AuxiliarAlmacens/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,24 +78,23 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var producto = await _context.Productos.FindAsync(id);
-            if (producto == null)
+            var auxiliarAlmacen = await _context.AuxiliarAlmacen.FindAsync(id);
+            if (auxiliarAlmacen == null)
             {
                 return NotFound();
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Id", producto.CategoriaId);
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Id", producto.ProveedorId);
-            return View(producto);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre", auxiliarAlmacen.UsuarioId);
+            return View(auxiliarAlmacen);
         }
 
-        // POST: Productos/Edit/5
+        // POST: AuxiliarAlmacens/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,PrecioCosto,PrecioVenta,Descripcion,FechaCreacion,Cantidad,CategoriaId,ProveedorId")] Producto producto)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UsuarioId,Credencial")] AuxiliarAlmacen auxiliarAlmacen)
         {
-            if (id != producto.Id)
+            if (id != auxiliarAlmacen.Id)
             {
                 return NotFound();
             }
@@ -106,12 +103,12 @@ namespace Proyecto.Controllers
             {
                 try
                 {
-                    _context.Update(producto);
+                    _context.Update(auxiliarAlmacen);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductoExists(producto.Id))
+                    if (!AuxiliarAlmacenExists(auxiliarAlmacen.Id))
                     {
                         return NotFound();
                     }
@@ -122,12 +119,11 @@ namespace Proyecto.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Id", producto.CategoriaId);
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Id", producto.ProveedorId);
-            return View(producto);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre", auxiliarAlmacen.UsuarioId);
+            return View(auxiliarAlmacen);
         }
 
-        // GET: Productos/Delete/5
+        // GET: AuxiliarAlmacens/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,36 +131,35 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var producto = await _context.Productos
-                .Include(p => p.Categoria)
-                .Include(p => p.Proveedor)
+            var auxiliarAlmacen = await _context.AuxiliarAlmacen
+                .Include(a => a.Usuario)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (producto == null)
+            if (auxiliarAlmacen == null)
             {
                 return NotFound();
             }
 
-            return View(producto);
+            return View(auxiliarAlmacen);
         }
 
-        // POST: Productos/Delete/5
+        // POST: AuxiliarAlmacens/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var producto = await _context.Productos.FindAsync(id);
-            if (producto != null)
+            var auxiliarAlmacen = await _context.AuxiliarAlmacen.FindAsync(id);
+            if (auxiliarAlmacen != null)
             {
-                _context.Productos.Remove(producto);
+                _context.AuxiliarAlmacen.Remove(auxiliarAlmacen);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductoExists(int id)
+        private bool AuxiliarAlmacenExists(int id)
         {
-            return _context.Productos.Any(e => e.Id == id);
+            return _context.AuxiliarAlmacen.Any(e => e.Id == id);
         }
     }
 }
