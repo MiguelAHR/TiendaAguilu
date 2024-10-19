@@ -4,33 +4,29 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="container">
+    <h1 class="my-4">Detalles del Proveedor</h1>
 
-<div>
-    <h4>Proveedor</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            Información del Proveedor
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-2">Nombre</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Nombre)</dd>
+
+                <dt class="col-sm-2">Teléfono</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Telefono)</dd>
+
+                <dt class="col-sm-2">Email</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Email)</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+        <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+    </div>
 </div>
