@@ -21,45 +21,51 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Pedidoes">Pedido</a>
+                        <!-- Dropdown para Pedidos -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownPedidos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Pedidos
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownPedidos">
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="Pedidoes">Agregar Pedido</a></li>
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="RegistroPagos">RegistroPagos</a></li>
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="TipoPagos">TipoPagos</a></li>
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="DetallePedidos">DetallePedidos</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="RegistroPagos">RegistroPagos</a>
+                        <!-- Dropdown para KARDEX -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownKardexs" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Pedidos
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownKardexs">
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="Kardexs">Agregar Kardex</a></li>
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="Inventarios">Inventario</a></li>
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="TipoMovimientos">TiposMovimiento</a></li>
+                            </ul>
                         </li>
+
+                       
+                        <!-- EMPLEADOS -->
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="TipoPagos">TipoPagos</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Personas">Empleados</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="DetallePedidos">DetallePedidos</a>
+
+                        <!-- Dropdown para Usuarios -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownUsuarios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Usuarios
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownUsuarios">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="AuxiliarAlmacens">Auxiliar Almacens</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="JefeAlmacens">Jefe Almacens</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Administradores">Administradores</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Usuarios">Agregar Usuario</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Roles">Agregar Rol</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Kardexs">Kardex</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Inventarios">Inventario</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="TipoMovimientos">TiposMovimiento</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Administradores">Administradores</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="JefeAlmacens">JefeAlmacens</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AuxiliarAlmacens">AuxiliarAlmacens</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios">Usuarios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Roles">Roles</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Personas">Personas</a>
-                        </li>
+
+                        
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Productos">Productos</a>
                         </li>
