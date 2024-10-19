@@ -160,6 +160,18 @@ namespace Proyecto.Data
                     .HasForeignKey(d => d.AdminId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
+            // Mapeo de las Entidades DetallePedido
+            modelBuilder.Entity<Pedido>().ToTable("pedido");
+            modelBuilder.Entity<DetallePedido>(entity =>
+            {
+                entity.ToTable("detallepedido");
+                // Configuración de la relación DetallePedido-Pedido
+                entity.HasOne(d => d.Pedido)
+                    .WithMany(p => p.DetallePedidos)
+                    .HasForeignKey(d => d.PedidoId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
 
             // Mapeo de las Entidades RegistroPago
             modelBuilder.Entity<TipoPago>().ToTable("tipoPago");
@@ -181,17 +193,6 @@ namespace Proyecto.Data
                 // Configuración de la relación RegistroPago-Pedido
                 entity.HasOne(d => d.Pedido)
                     .WithMany(p => p.RegistroPagos)
-                    .HasForeignKey(d => d.PedidoId)
-                    .OnDelete(DeleteBehavior.Cascade);
-            });
-            // Mapeo de las Entidades DetallePedido
-            modelBuilder.Entity<Pedido>().ToTable("pedido");
-            modelBuilder.Entity<DetallePedido>(entity =>
-            {
-                entity.ToTable("detallepedido");
-                // Configuración de la relación DetallePedido-Pedido
-                entity.HasOne(d => d.Pedido)
-                    .WithMany(p => p.DetallePedidos)
                     .HasForeignKey(d => d.PedidoId)
                     .OnDelete(DeleteBehavior.Cascade);
             });

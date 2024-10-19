@@ -52,7 +52,7 @@ namespace Proyecto.Controllers
         {
             ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Id");
             ViewData["PedidoId"] = new SelectList(_context.Pedido, "Id", "Id");
-            ViewData["TipoPagoId"] = new SelectList(_context.TipoPago, "Id", "Nombre");
+            ViewData["TipoPagoId"] = new SelectList(_context.TipoPago, "Id", "tipo");
             return View();
         }
 
@@ -66,6 +66,7 @@ namespace Proyecto.Controllers
             ModelState.Remove("TipoPago");
             ModelState.Remove("Administrador");
             ModelState.Remove("Pedido");
+
             if (ModelState.IsValid)
             {
                 _context.Add(registroPago);
@@ -74,7 +75,7 @@ namespace Proyecto.Controllers
             }
             ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Id", registroPago.AdminId);
             ViewData["PedidoId"] = new SelectList(_context.Pedido, "Id", "Id", registroPago.PedidoId);
-            ViewData["TipoPagoId"] = new SelectList(_context.TipoPago, "Id", "Nombre", registroPago.TipoPagoId);
+            ViewData["TipoPagoId"] = new SelectList(_context.TipoPago, "Id", "tipo", registroPago.TipoPagoId);
             return View(registroPago);
         }
 
@@ -93,7 +94,7 @@ namespace Proyecto.Controllers
             }
             ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Id", registroPago.AdminId);
             ViewData["PedidoId"] = new SelectList(_context.Pedido, "Id", "Id", registroPago.PedidoId);
-            ViewData["TipoPagoId"] = new SelectList(_context.TipoPago, "Id", "Nombre", registroPago.TipoPagoId);
+            ViewData["TipoPagoId"] = new SelectList(_context.TipoPago, "Id", "tipo", registroPago.TipoPagoId);
             return View(registroPago);
         }
 
@@ -131,7 +132,7 @@ namespace Proyecto.Controllers
             }
             ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Id", registroPago.AdminId);
             ViewData["PedidoId"] = new SelectList(_context.Pedido, "Id", "Id", registroPago.PedidoId);
-            ViewData["TipoPagoId"] = new SelectList(_context.TipoPago, "Id", "Nombre", registroPago.TipoPagoId);
+            ViewData["TipoPagoId"] = new SelectList(_context.TipoPago, "Id", "tipo", registroPago.TipoPagoId);
             return View(registroPago);
         }
 
