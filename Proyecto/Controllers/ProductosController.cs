@@ -67,8 +67,8 @@ namespace Proyecto.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Id", producto.CategoriaId);
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Id", producto.ProveedorId);
+            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Nombre", producto.CategoriaId);
+            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Nombre", producto.ProveedorId);
             return View(producto);
         }
 
@@ -85,8 +85,8 @@ namespace Proyecto.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Id", producto.CategoriaId);
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Id", producto.ProveedorId);
+            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Nombre", producto.CategoriaId);
+            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Nombre", producto.ProveedorId);
             return View(producto);
         }
 
@@ -122,8 +122,8 @@ namespace Proyecto.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Id", producto.CategoriaId);
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Id", producto.ProveedorId);
+            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Nombre", producto.CategoriaId);
+            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Nombre", producto.ProveedorId);
             return View(producto);
         }
 
