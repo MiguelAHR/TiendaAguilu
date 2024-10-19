@@ -10,23 +10,23 @@ using Proyecto.Models;
 
 namespace Proyecto.Controllers
 {
-    public class JefeAlmacensController : Controller
+    public class DetallePedidosController : Controller
     {
         private readonly ProyectoContext _context;
 
-        public JefeAlmacensController(ProyectoContext context)
+        public DetallePedidosController(ProyectoContext context)
         {
             _context = context;
         }
 
-        // GET: JefeAlmacens
+        // GET: DetallePedidos
         public async Task<IActionResult> Index()
         {
-            var proyectoContext = _context.JefeAlmacen.Include(j => j.Usuario);
+            var proyectoContext = _context.DetallePedido.Include(d => d.Pedido);
             return View(await proyectoContext.ToListAsync());
         }
 
-        // GET: JefeAlmacens/Details/5
+        // GET: DetallePedidos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,43 +34,44 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var jefeAlmacen = await _context.JefeAlmacen
-                .Include(j => j.Usuario)
+            var detallePedido = await _context.DetallePedido
+                .Include(d => d.Pedido)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (jefeAlmacen == null)
+            if (detallePedido == null)
             {
                 return NotFound();
             }
 
-            return View(jefeAlmacen);
+            return View(detallePedido);
         }
 
-        // GET: JefeAlmacens/Create
+        // GET: DetallePedidos/Create
         public IActionResult Create()
         {
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre");
+            ViewData["PedidoId"] = new SelectList(_context.Pedido, "Id", "Id");
             return View();
         }
 
-        // POST: JefeAlmacens/Create
+        // POST: DetallePedidos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UsuarioId,Credencial")] JefeAlmacen jefeAlmacen)
+        public async Task<IActionResult> Create([Bind("Id,PedidoId,Cantidad,PrecioUnitario")] DetallePedido detallePedido)
         {
-            ModelState.Remove("Usuario");
+
+            ModelState.Remove("Pedido");
             if (ModelState.IsValid)
             {
-                _context.Add(jefeAlmacen);
+                _context.Add(detallePedido);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre", jefeAlmacen.UsuarioId);
-            return View(jefeAlmacen);
+            ViewData["PedidoId"] = new SelectList(_context.Pedido, "Id", "Id", detallePedido.PedidoId);
+            return View(detallePedido);
         }
 
-        // GET: JefeAlmacens/Edit/5
+        // GET: DetallePedidos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,23 +79,23 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var jefeAlmacen = await _context.JefeAlmacen.FindAsync(id);
-            if (jefeAlmacen == null)
+            var detallePedido = await _context.DetallePedido.FindAsync(id);
+            if (detallePedido == null)
             {
                 return NotFound();
             }
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre", jefeAlmacen.UsuarioId);
-            return View(jefeAlmacen);
+            ViewData["PedidoId"] = new SelectList(_context.Pedido, "Id", "Id", detallePedido.PedidoId);
+            return View(detallePedido);
         }
 
-        // POST: JefeAlmacens/Edit/5
+        // POST: DetallePedidos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UsuarioId,Credencial")] JefeAlmacen jefeAlmacen)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,PedidoId,Cantidad,PrecioUnitario")] DetallePedido detallePedido)
         {
-            if (id != jefeAlmacen.Id)
+            if (id != detallePedido.Id)
             {
                 return NotFound();
             }
@@ -103,12 +104,12 @@ namespace Proyecto.Controllers
             {
                 try
                 {
-                    _context.Update(jefeAlmacen);
+                    _context.Update(detallePedido);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!JefeAlmacenExists(jefeAlmacen.Id))
+                    if (!DetallePedidoExists(detallePedido.Id))
                     {
                         return NotFound();
                     }
@@ -119,11 +120,11 @@ namespace Proyecto.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre", jefeAlmacen.UsuarioId);
-            return View(jefeAlmacen);
+            ViewData["PedidoId"] = new SelectList(_context.Pedido, "Id", "Id", detallePedido.PedidoId);
+            return View(detallePedido);
         }
 
-        // GET: JefeAlmacens/Delete/5
+        // GET: DetallePedidos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,35 +132,35 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var jefeAlmacen = await _context.JefeAlmacen
-                .Include(j => j.Usuario)
+            var detallePedido = await _context.DetallePedido
+                .Include(d => d.Pedido)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (jefeAlmacen == null)
+            if (detallePedido == null)
             {
                 return NotFound();
             }
 
-            return View(jefeAlmacen);
+            return View(detallePedido);
         }
 
-        // POST: JefeAlmacens/Delete/5
+        // POST: DetallePedidos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var jefeAlmacen = await _context.JefeAlmacen.FindAsync(id);
-            if (jefeAlmacen != null)
+            var detallePedido = await _context.DetallePedido.FindAsync(id);
+            if (detallePedido != null)
             {
-                _context.JefeAlmacen.Remove(jefeAlmacen);
+                _context.DetallePedido.Remove(detallePedido);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool JefeAlmacenExists(int id)
+        private bool DetallePedidoExists(int id)
         {
-            return _context.JefeAlmacen.Any(e => e.Id == id);
+            return _context.DetallePedido.Any(e => e.Id == id);
         }
     }
 }

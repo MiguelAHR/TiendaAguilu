@@ -4,7 +4,6 @@
     {
         public int Id { get; set; }
 
-        public string Nombre { get; set; }
         public DateTime FechaMovimiento { get; set; }
         public int TipoMovId { get; set; }
         public TipoMovimiento TipoMovimiento { get; set; }

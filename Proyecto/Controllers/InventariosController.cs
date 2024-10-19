@@ -10,23 +10,22 @@ using Proyecto.Models;
 
 namespace Proyecto.Controllers
 {
-    public class JefeAlmacensController : Controller
+    public class InventariosController : Controller
     {
         private readonly ProyectoContext _context;
 
-        public JefeAlmacensController(ProyectoContext context)
+        public InventariosController(ProyectoContext context)
         {
             _context = context;
         }
 
-        // GET: JefeAlmacens
+        // GET: Inventarios
         public async Task<IActionResult> Index()
         {
-            var proyectoContext = _context.JefeAlmacen.Include(j => j.Usuario);
-            return View(await proyectoContext.ToListAsync());
+            return View(await _context.Inventario.ToListAsync());
         }
 
-        // GET: JefeAlmacens/Details/5
+        // GET: Inventarios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,43 +33,39 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var jefeAlmacen = await _context.JefeAlmacen
-                .Include(j => j.Usuario)
+            var inventario = await _context.Inventario
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (jefeAlmacen == null)
+            if (inventario == null)
             {
                 return NotFound();
             }
 
-            return View(jefeAlmacen);
+            return View(inventario);
         }
 
-        // GET: JefeAlmacens/Create
+        // GET: Inventarios/Create
         public IActionResult Create()
         {
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre");
             return View();
         }
 
-        // POST: JefeAlmacens/Create
+        // POST: Inventarios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UsuarioId,Credencial")] JefeAlmacen jefeAlmacen)
+        public async Task<IActionResult> Create([Bind("Id,CantidadMinima,CantidadMaxima,fechaIngreso,Capacidad,Estado")] Inventario inventario)
         {
-            ModelState.Remove("Usuario");
             if (ModelState.IsValid)
             {
-                _context.Add(jefeAlmacen);
+                _context.Add(inventario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre", jefeAlmacen.UsuarioId);
-            return View(jefeAlmacen);
+            return View(inventario);
         }
 
-        // GET: JefeAlmacens/Edit/5
+        // GET: Inventarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,23 +73,22 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var jefeAlmacen = await _context.JefeAlmacen.FindAsync(id);
-            if (jefeAlmacen == null)
+            var inventario = await _context.Inventario.FindAsync(id);
+            if (inventario == null)
             {
                 return NotFound();
             }
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre", jefeAlmacen.UsuarioId);
-            return View(jefeAlmacen);
+            return View(inventario);
         }
 
-        // POST: JefeAlmacens/Edit/5
+        // POST: Inventarios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UsuarioId,Credencial")] JefeAlmacen jefeAlmacen)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CantidadMinima,CantidadMaxima,fechaIngreso,Capacidad,Estado")] Inventario inventario)
         {
-            if (id != jefeAlmacen.Id)
+            if (id != inventario.Id)
             {
                 return NotFound();
             }
@@ -103,12 +97,12 @@ namespace Proyecto.Controllers
             {
                 try
                 {
-                    _context.Update(jefeAlmacen);
+                    _context.Update(inventario);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!JefeAlmacenExists(jefeAlmacen.Id))
+                    if (!InventarioExists(inventario.Id))
                     {
                         return NotFound();
                     }
@@ -119,11 +113,10 @@ namespace Proyecto.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre", jefeAlmacen.UsuarioId);
-            return View(jefeAlmacen);
+            return View(inventario);
         }
 
-        // GET: JefeAlmacens/Delete/5
+        // GET: Inventarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,35 +124,34 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var jefeAlmacen = await _context.JefeAlmacen
-                .Include(j => j.Usuario)
+            var inventario = await _context.Inventario
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (jefeAlmacen == null)
+            if (inventario == null)
             {
                 return NotFound();
             }
 
-            return View(jefeAlmacen);
+            return View(inventario);
         }
 
-        // POST: JefeAlmacens/Delete/5
+        // POST: Inventarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var jefeAlmacen = await _context.JefeAlmacen.FindAsync(id);
-            if (jefeAlmacen != null)
+            var inventario = await _context.Inventario.FindAsync(id);
+            if (inventario != null)
             {
-                _context.JefeAlmacen.Remove(jefeAlmacen);
+                _context.Inventario.Remove(inventario);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool JefeAlmacenExists(int id)
+        private bool InventarioExists(int id)
         {
-            return _context.JefeAlmacen.Any(e => e.Id == id);
+            return _context.Inventario.Any(e => e.Id == id);
         }
     }
 }

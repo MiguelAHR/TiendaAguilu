@@ -10,23 +10,23 @@ using Proyecto.Models;
 
 namespace Proyecto.Controllers
 {
-    public class JefeAlmacensController : Controller
+    public class AdministradoresController : Controller
     {
         private readonly ProyectoContext _context;
 
-        public JefeAlmacensController(ProyectoContext context)
+        public AdministradoresController(ProyectoContext context)
         {
             _context = context;
         }
 
-        // GET: JefeAlmacens
+        // GET: Administradores
         public async Task<IActionResult> Index()
         {
-            var proyectoContext = _context.JefeAlmacen.Include(j => j.Usuario);
+            var proyectoContext = _context.Administrador.Include(a => a.Usuario);
             return View(await proyectoContext.ToListAsync());
         }
 
-        // GET: JefeAlmacens/Details/5
+        // GET: Administradores/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,43 +34,43 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var jefeAlmacen = await _context.JefeAlmacen
-                .Include(j => j.Usuario)
+            var administrador = await _context.Administrador
+                .Include(a => a.Usuario)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (jefeAlmacen == null)
+            if (administrador == null)
             {
                 return NotFound();
             }
 
-            return View(jefeAlmacen);
+            return View(administrador);
         }
 
-        // GET: JefeAlmacens/Create
+        // GET: Administradores/Create
         public IActionResult Create()
         {
             ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre");
             return View();
         }
 
-        // POST: JefeAlmacens/Create
+        // POST: Administradores/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UsuarioId,Credencial")] JefeAlmacen jefeAlmacen)
+        public async Task<IActionResult> Create([Bind("Id,UsuarioId,Credencial")] Administrador administrador)
         {
             ModelState.Remove("Usuario");
             if (ModelState.IsValid)
             {
-                _context.Add(jefeAlmacen);
+                _context.Add(administrador);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre", jefeAlmacen.UsuarioId);
-            return View(jefeAlmacen);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre", administrador.UsuarioId);
+            return View(administrador);
         }
 
-        // GET: JefeAlmacens/Edit/5
+        // GET: Administradores/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,23 +78,23 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var jefeAlmacen = await _context.JefeAlmacen.FindAsync(id);
-            if (jefeAlmacen == null)
+            var administrador = await _context.Administrador.FindAsync(id);
+            if (administrador == null)
             {
                 return NotFound();
             }
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre", jefeAlmacen.UsuarioId);
-            return View(jefeAlmacen);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre", administrador.UsuarioId);
+            return View(administrador);
         }
 
-        // POST: JefeAlmacens/Edit/5
+        // POST: Administradores/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UsuarioId,Credencial")] JefeAlmacen jefeAlmacen)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UsuarioId,Credencial")] Administrador administrador)
         {
-            if (id != jefeAlmacen.Id)
+            if (id != administrador.Id)
             {
                 return NotFound();
             }
@@ -103,12 +103,12 @@ namespace Proyecto.Controllers
             {
                 try
                 {
-                    _context.Update(jefeAlmacen);
+                    _context.Update(administrador);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!JefeAlmacenExists(jefeAlmacen.Id))
+                    if (!AdministradorExists(administrador.Id))
                     {
                         return NotFound();
                     }
@@ -119,11 +119,11 @@ namespace Proyecto.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre", jefeAlmacen.UsuarioId);
-            return View(jefeAlmacen);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre", administrador.UsuarioId);
+            return View(administrador);
         }
 
-        // GET: JefeAlmacens/Delete/5
+        // GET: Administradores/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,35 +131,35 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
-            var jefeAlmacen = await _context.JefeAlmacen
-                .Include(j => j.Usuario)
+            var administrador = await _context.Administrador
+                .Include(a => a.Usuario)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (jefeAlmacen == null)
+            if (administrador == null)
             {
                 return NotFound();
             }
 
-            return View(jefeAlmacen);
+            return View(administrador);
         }
 
-        // POST: JefeAlmacens/Delete/5
+        // POST: Administradores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var jefeAlmacen = await _context.JefeAlmacen.FindAsync(id);
-            if (jefeAlmacen != null)
+            var administrador = await _context.Administrador.FindAsync(id);
+            if (administrador != null)
             {
-                _context.JefeAlmacen.Remove(jefeAlmacen);
+                _context.Administrador.Remove(administrador);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool JefeAlmacenExists(int id)
+        private bool AdministradorExists(int id)
         {
-            return _context.JefeAlmacen.Any(e => e.Id == id);
+            return _context.Administrador.Any(e => e.Id == id);
         }
     }
 }
