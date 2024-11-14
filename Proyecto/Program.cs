@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Proyecto.Controllers;
 using Proyecto.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ProyectoContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<AuthService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,6 +29,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Auth}/{action=Index}/{id?}");
 
 app.Run();
