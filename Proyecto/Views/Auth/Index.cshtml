@@ -2,12 +2,90 @@
     Layout = null;
 }
 
-<form action="/Auth/Login" method="post">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <!-- Enlace al CSS de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Enlace a la fuente Sour Gummy -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(to bottom, #ffffff, #B9D4DD, #87AAB5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Sour Gummy', sans-serif;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .logo-container img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-right: 15px;
+        }
+        .logo-container span {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .card-header {
+            font-weight: bold;
+        }
+        label, .btn {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="~/images/logo.jpg" alt="Logo Aguilu">
+            <span>Aguilu</span>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h4>Iniciar Sesión</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="/Auth/Login" method="post">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Usuario:</label>
+                                <input type="text" id="nombre" name="nombre" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contra" class="form-label">Clave:</label>
+                                <input type="password" id="contra" name="contra" class="form-control" required>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <label for="nombre">Usuario: </label>
-        <input type="text" id="nombre" name="nombre" required>
-
-        <label for="contra">Clave: </label>
-            <input type="password" id="contra" name="contra" required>
-            <button type="submit">Iniciar Sesión</button>
-</form>
+    <!-- Enlace al JavaScript de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
