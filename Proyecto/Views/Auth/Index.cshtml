@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     Layout = null;
 }
 
@@ -9,21 +9,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
     <link rel="stylesheet" href="/css/login.css">
-
-    <!-- Fuente Sour Gummy -->
+    <!-- Enlace a la fuente Sour Gummy -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <!-- ---------------- -->
+    <!-- Enlace a la fuente Sour Gummy -->
 </head>
 <body>
     <div class="login-container">
-        <img src="/images/perfil.png" alt="User Icon"> 
+        <img src="/images/perfil.png" alt="User Icon">
         <form action="/Auth/Login" method="post">
             <label for="nombre" style="font-size:16px">Nombre de Usuario</label>
             <input type="text" id="nombre" name="nombre" required>
 
-        <label for="contra">Clave: </label>
+            <label for="contra" style="font-size:16px">Contraseña</label>
             <input type="password" id="contra" name="contra" required>
-            <button type="submit">Iniciar Sesión</button>
-</form>
+
+            <button type="submit" class="btn-custom">Iniciar Sesión</button>
+        </form>
+    </div>
+</body>
+</html>
