@@ -2,12 +2,26 @@
     Layout = null;
 }
 
-<form action="/Auth/Login" method="post">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="/css/login.css"> 
+</head>
+<body>
+    <div class="login-container">
+        <img src="/images/perfil.png" alt="User Icon"> 
+        <form action="/Auth/Login" method="post">
+            <label for="nombre">Nombre de Usuario</label>
+            <input type="text" id="nombre" name="nombre" required>
 
-    <label for="nombre">Usuario: </label>
-        <input type="text" id="nombre" name="nombre" required>
-
-        <label for="contra">Clave: </label>
+            <label for="contra">Contraseña</label>
             <input type="password" id="contra" name="contra" required>
-            <button type="submit">Iniciar Sesión</button>
-</form>
+
+            <button type="submit" class="btn-custom">Iniciar Sesión</button>
+        </form>
+    </div>
+</body>
+</html>
