@@ -9,33 +9,67 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 mb-4">
-                <img src="~/images/peluche.jpg" alt="Peluche 1" class="img-fluid rounded shadow" />
+                <img src="~/images/peluche.jpg" alt="Peluche 1" class="img-fluid rounded shadow img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" />
             </div>
             <div class="col-md-4 mb-4">
-                <img src="~/images/peluches2.jpg" alt="Peluche 2" class="img-fluid rounded shadow" />
+                <img src="~/images/peluches2.jpg" alt="Peluche 2" class="img-fluid rounded shadow img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" />
             </div>
             <div class="col-md-4 mb-4">
-                <img src="~/images/peluches3.jpeg" alt="Peluche 3" class="img-fluid rounded shadow" />
+                <img src="~/images/peluches3.jpeg" alt="Peluche 3" class="img-fluid rounded shadow img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" />
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-4 mb-4">
-                <img src="~/images/peluches4.jpg" alt="Peluche 4" class="img-fluid rounded shadow" />
+                <img src="~/images/peluches4.jpg" alt="Peluche 4" class="img-fluid rounded shadow img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" />
             </div>
             <div class="col-md-4 mb-4">
-                <img src="~/images/peluches5.jpg" alt="Peluche 5" class="img-fluid rounded shadow" />
+                <img src="~/images/peluches5.jpg" alt="Peluche 5" class="img-fluid rounded shadow img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" />
+            </div>
+            <div class="col-md-4 mb-4">
+                <img src="~/images/peluches 6.jpg" alt="Peluche 6" class="img-fluid rounded shadow img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" />
+            </div>
         </div>
-            <div class="col-md-4 mb-4">
-                <img src="~/images/peluches 6.jpg" alt="Peluche 3" class="img-fluid rounded shadow" />
-            </div>
-    </div>
+
         <div class="mt-5 p-4 bg-light rounded shadow">
             <h3 class="text-center text-dark">¿Por qué elegirnos?</h3>
             <p class="text-center">Ofrecemos peluches de la mejor calidad, ideales para todos los amantes de los peluches. Nuestros productos son seguros, suaves y perfectos para regalar o disfrutar.</p>
         </div>
 
-    <footer class="mt-5">
-        <p class="text-muted">© 2024 Tienda de Peluches. Todos los derechos reservados.</p>
-    </footer>
+        <footer class="mt-5">
+            <p class="text-muted">© 2024 Tienda de Peluches. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 bg-transparent">
+                <div class="modal-body p-0 text-center">
+                    <img id="modalImage" src="" alt="Imagen grande" class="img-fluid rounded" style="transform: scale(1.5);" />
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    // Función para mostrar la imagen seleccionada en el modal
+    function showImage(element) {
+        const modalImage = document.getElementById('modalImage');
+        modalImage.src = element.src; // Asigna la fuente de la imagen seleccionada al modal
+        modalImage.alt = element.alt; // Asigna el texto alternativo al modal
+    }
+</script>
+
+<style>
+    /* Estilo personalizado */
+    .modal-content {
+        background: none; /* Fondo transparente */
+        border: none; /* Sin bordes */
+    }
+
+    .modal-body img {
+        transition: transform 0.3s ease; /* Animación suave para el escalado */
+    }
+</style>

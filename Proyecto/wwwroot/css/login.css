@@ -1,6 +1,6 @@
 ﻿
 body {
-    background-image: url('NewFolder/fondo.jpg'); 
+    background-image: url('NewFolder/fondo.jpg');
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -8,7 +8,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial, sans-serif;
+    /*font-family: Arial, sans-serif;*/
+    font-family: 'Sour Gummy', sans-serif;
 }
 
 .login-container {
