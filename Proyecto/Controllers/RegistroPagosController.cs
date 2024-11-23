@@ -50,8 +50,8 @@ namespace Proyecto.Controllers
         // GET: RegistroPagos/Create
         public IActionResult Create()
         {
-            ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Id");
-            ViewData["PedidoId"] = new SelectList(_context.Pedido, "Id", "Id");
+            ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Credencial");
+            ViewData["PedidoId"] = new SelectList(_context.Pedido, "Id", "Fecha");
             ViewData["TipoPagoId"] = new SelectList(_context.TipoPago, "Id", "tipo");
             return View();
         }
@@ -73,8 +73,8 @@ namespace Proyecto.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Id", registroPago.AdminId);
-            ViewData["PedidoId"] = new SelectList(_context.Pedido, "Id", "Id", registroPago.PedidoId);
+            ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Credencial", registroPago.AdminId);
+            ViewData["PedidoId"] = new SelectList(_context.Pedido, "Id", "Fecha", registroPago.PedidoId);
             ViewData["TipoPagoId"] = new SelectList(_context.TipoPago, "Id", "tipo", registroPago.TipoPagoId);
             return View(registroPago);
         }
@@ -92,8 +92,8 @@ namespace Proyecto.Controllers
             {
                 return NotFound();
             }
-            ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Id", registroPago.AdminId);
-            ViewData["PedidoId"] = new SelectList(_context.Pedido, "Id", "Id", registroPago.PedidoId);
+            ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Credencial", registroPago.AdminId);
+            ViewData["PedidoId"] = new SelectList(_context.Pedido, "Id", "Fecha", registroPago.PedidoId);
             ViewData["TipoPagoId"] = new SelectList(_context.TipoPago, "Id", "tipo", registroPago.TipoPagoId);
             return View(registroPago);
         }
@@ -130,8 +130,8 @@ namespace Proyecto.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Id", registroPago.AdminId);
-            ViewData["PedidoId"] = new SelectList(_context.Pedido, "Id", "Id", registroPago.PedidoId);
+            ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Credencial", registroPago.AdminId);
+            ViewData["PedidoId"] = new SelectList(_context.Pedido, "Id", "Fecha", registroPago.PedidoId);
             ViewData["TipoPagoId"] = new SelectList(_context.TipoPago, "Id", "tipo", registroPago.TipoPagoId);
             return View(registroPago);
         }

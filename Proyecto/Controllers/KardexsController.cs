@@ -51,8 +51,8 @@ namespace Proyecto.Controllers
         // GET: Kardexs/Create
         public IActionResult Create()
         {
-            ViewData["InventarioId"] = new SelectList(_context.Inventario, "Id", "Id");
-            ViewData["jefeAlmacenId"] = new SelectList(_context.JefeAlmacen, "Id", "Id");
+            ViewData["InventarioId"] = new SelectList(_context.Inventario, "Id", "fechaIngreso");
+            ViewData["jefeAlmacenId"] = new SelectList(_context.JefeAlmacen, "Id", "Credencial");
             ViewData["ProductoId"] = new SelectList(_context.Productos, "Id", "Nombre");
             ViewData["TipoMovId"] = new SelectList(_context.TipoMovimiento, "Id", "Nombre");
             return View();
@@ -76,8 +76,8 @@ namespace Proyecto.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["InventarioId"] = new SelectList(_context.Inventario, "Id", "Id", kardex.InventarioId);
-            ViewData["jefeAlmacenId"] = new SelectList(_context.JefeAlmacen, "Id", "Id", kardex.jefeAlmacenId);
+            ViewData["InventarioId"] = new SelectList(_context.Inventario, "Id", "fechaIngreso", kardex.InventarioId);
+            ViewData["jefeAlmacenId"] = new SelectList(_context.JefeAlmacen, "Id", "Credencial", kardex.jefeAlmacenId);
             ViewData["ProductoId"] = new SelectList(_context.Productos, "Id", "Nombre", kardex.ProductoId);
             ViewData["TipoMovId"] = new SelectList(_context.TipoMovimiento, "Id", "Nombre", kardex.TipoMovId);
             return View(kardex);
@@ -96,8 +96,8 @@ namespace Proyecto.Controllers
             {
                 return NotFound();
             }
-            ViewData["InventarioId"] = new SelectList(_context.Inventario, "Id", "Id", kardex.InventarioId);
-            ViewData["jefeAlmacenId"] = new SelectList(_context.JefeAlmacen, "Id", "Id", kardex.jefeAlmacenId);
+            ViewData["InventarioId"] = new SelectList(_context.Inventario, "Id", "fechaIngreso", kardex.InventarioId);
+            ViewData["jefeAlmacenId"] = new SelectList(_context.JefeAlmacen, "Id", "Credencial", kardex.jefeAlmacenId);
             ViewData["ProductoId"] = new SelectList(_context.Productos, "Id", "Nombre", kardex.ProductoId);
             ViewData["TipoMovId"] = new SelectList(_context.TipoMovimiento, "Id", "Nombre", kardex.TipoMovId);
             return View(kardex);
@@ -135,8 +135,8 @@ namespace Proyecto.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["InventarioId"] = new SelectList(_context.Inventario, "Id", "Id", kardex.InventarioId);
-            ViewData["jefeAlmacenId"] = new SelectList(_context.JefeAlmacen, "Id", "Id", kardex.jefeAlmacenId);
+            ViewData["InventarioId"] = new SelectList(_context.Inventario, "Id", "fechaIngreso", kardex.InventarioId);
+            ViewData["jefeAlmacenId"] = new SelectList(_context.JefeAlmacen, "Id", "Credencial", kardex.jefeAlmacenId);
             ViewData["ProductoId"] = new SelectList(_context.Productos, "Id", "Nombre", kardex.ProductoId);
             ViewData["TipoMovId"] = new SelectList(_context.TipoMovimiento, "Id", "Nombre", kardex.TipoMovId);
             return View(kardex);

@@ -50,9 +50,9 @@ namespace Proyecto.Controllers
         // GET: Pedidoes/Create
         public IActionResult Create()
         {
-            ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Id");
+            ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Credencial");
             ViewData["ProductoId"] = new SelectList(_context.Productos, "Id", "Nombre");
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Id");
+            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Nombre");
             return View();
         }
 
@@ -72,9 +72,9 @@ namespace Proyecto.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Id", pedido.AdminId);
+            ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Credencial", pedido.AdminId);
             ViewData["ProductoId"] = new SelectList(_context.Productos, "Id", "Nombre", pedido.ProductoId);
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Id", pedido.ProveedorId);
+            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Nombre", pedido.ProveedorId);
             return View(pedido);
         }
 
@@ -91,9 +91,9 @@ namespace Proyecto.Controllers
             {
                 return NotFound();
             }
-            ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Id", pedido.AdminId);
+            ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Credencial", pedido.AdminId);
             ViewData["ProductoId"] = new SelectList(_context.Productos, "Id", "Nombre", pedido.ProductoId);
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Id", pedido.ProveedorId);
+            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Nombre", pedido.ProveedorId);
             return View(pedido);
         }
 
@@ -129,9 +129,9 @@ namespace Proyecto.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Id", pedido.AdminId);
+            ViewData["AdminId"] = new SelectList(_context.Administrador, "Id", "Credencial", pedido.AdminId);
             ViewData["ProductoId"] = new SelectList(_context.Productos, "Id", "Nombre", pedido.ProductoId);
-            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Id", pedido.ProveedorId);
+            ViewData["ProveedorId"] = new SelectList(_context.Proveedor, "Id", "Nombre", pedido.ProveedorId);
             return View(pedido);
         }
 
