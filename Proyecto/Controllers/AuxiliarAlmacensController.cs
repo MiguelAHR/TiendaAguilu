@@ -98,7 +98,7 @@ namespace Proyecto.Controllers
             {
                 return NotFound();
             }
-
+            ModelState.Remove("Usuario");
             if (ModelState.IsValid)
             {
                 try

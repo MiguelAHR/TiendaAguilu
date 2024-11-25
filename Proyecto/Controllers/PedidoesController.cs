@@ -109,6 +109,10 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
+            ModelState.Remove("Proveedor");
+            ModelState.Remove("Producto");
+            ModelState.Remove("Administrador");
+
             if (ModelState.IsValid)
             {
                 try

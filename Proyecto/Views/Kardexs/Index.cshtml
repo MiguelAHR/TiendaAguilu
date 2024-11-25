@@ -7,7 +7,7 @@
 <h1 class="mb-4">Kardex</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Crear Nuevo</a>
+    <a asp-action="Create" class="btn btn-secondary">Agregar nuevo kardex </a>
 </p>
 
 <table class="table table-striped">
@@ -42,7 +42,7 @@
                     @Html.DisplayFor(modelItem => item.TipoMovimiento.Nombre)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Inventario.fechaIngreso)
+                    @Html.DisplayFor(modelItem => item.Inventario.Id)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Producto.Nombre)

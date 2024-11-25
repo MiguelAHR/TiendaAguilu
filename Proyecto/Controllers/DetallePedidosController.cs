@@ -100,6 +100,8 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
+            ModelState.Remove("Pedido");
+
             if (ModelState.IsValid)
             {
                 try

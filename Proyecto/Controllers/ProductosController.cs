@@ -104,6 +104,9 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
+            ModelState.Remove("Categoria");
+            ModelState.Remove("Proveedor");
+
             if (ModelState.IsValid)
             {
                 try

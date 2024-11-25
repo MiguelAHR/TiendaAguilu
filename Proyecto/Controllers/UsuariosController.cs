@@ -103,7 +103,8 @@ namespace Proyecto.Controllers
             {
                 return NotFound();
             }
-
+            ModelState.Remove("Rol");
+            ModelState.Remove("Persona");
             if (ModelState.IsValid)
             {
                 try

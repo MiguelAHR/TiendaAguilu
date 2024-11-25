@@ -110,6 +110,10 @@ namespace Proyecto.Controllers
                 return NotFound();
             }
 
+            ModelState.Remove("TipoPago");
+            ModelState.Remove("Administrador");
+            ModelState.Remove("Pedido");
+
             if (ModelState.IsValid)
             {
                 try

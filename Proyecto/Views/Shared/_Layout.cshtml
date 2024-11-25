@@ -33,6 +33,12 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
         }
 
+        .icon {
+            width: 32px;
+            height: 32px;
+            object-fit: cover;
+        }
+
         .nav-item {
             list-style: none; /* Elimina los puntos de las li*/
         }
@@ -65,6 +71,24 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Proveedors" asp-action="Index">Proveedores</a>
                         </li>
+                        <!-- EMPLEADOS -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Personas" asp-action="Index">Personas</a>
+                        </li>
+
+                        <!-- Dropdown para Usuarios -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownUsuarios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Usuarios
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownUsuarios">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="AuxiliarAlmacens" asp-action="Index">Auxiliar Almacens</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="JefeAlmacens" asp-action="Index">Jefe Almacens</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Administradores" asp-action="Index">Administradores</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Usuarios" asp-action="Index">Agregar Usuario</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Roles" asp-action="Index">Agregar Rol</a></li>
+                            </ul>
+                        </li>
                         <!-- Dropdown para Pedidos -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownPedidos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -88,28 +112,16 @@
                                 <li><a class="nav-link text-dark" asp-area="" asp-controller="TipoMovimientos" asp-action="Index">TiposMovimiento</a></li>
                             </ul>
                         </li>
-
-                       
-                        <!-- EMPLEADOS -->
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Personas" asp-action="Index">Personas</a>
-                        </li>
-
-                        <!-- Dropdown para Usuarios -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownUsuarios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Usuarios
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownUsuarios">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="AuxiliarAlmacens" asp-action="Index">Auxiliar Almacens</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="JefeAlmacens" asp-action="Index">Jefe Almacens</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Administradores" asp-action="Index">Administradores</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Usuarios" asp-action="Index">Agregar Usuario</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Roles" asp-action="Index">Agregar Rol</a></li>
-                            </ul>
-                        </li>
-
                     </ul>
+                    <li class="nav-item" style="margin-right: auto; margin-left: 320px">
+                        <button class="btn btn-danger">
+                            <a class="navbar-brand" asp-area="" asp-controller="Auth" asp-action="Index" style="display: flex; align-items: center;">
+                                <img class="icon" src="~/images/cerrar.png" alt="Logo Aguilu">
+                                <span style="margin-left: 10px; font-size: 1.0rem;">Cerrar Session</span>
+                            </a>
+                        </button>
+
+                    </li>
                 </div>
             </div>
         </nav>
