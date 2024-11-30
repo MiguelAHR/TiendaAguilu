@@ -34,9 +34,10 @@
 
         <form asp-action="Delete">
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <input type="submit" value="Eliminar" class="btn btn-danger" />
-                <a asp-action="Index" class="btn btn-secondary ml-2">Volver a la lista</a>
+            <br>
+            <div class="form-group d-flex gap-3">
+                <input type="submit" value="Eliminar" class="btn btn-danger mr-2" />
+                <a asp-action="Index" class="btn btn-lg btn-outline-dark shadow-sm">Volver a la lista</a>
             </div>
         </form>
     </div>
