@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Proyecto.Models.Kardex>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="text-center py-5 bg-danger text-white rounded shadow-lg mb-4">
+    
+    <h2 class="display-6">Producto Menos Vendido</h2>
+    <p class="lead">¡Descubre cuál es el producto que menos se ha vendido!</p>
+</div>
+
+
+@if (ViewBag.Producto != null)
+{
+    <div class="card shadow-lg mb-4">
+        <div class="card-header bg-warning text-white">
+            <h3 class="card-title">Producto Menos Vendido</h3>
+        </div>
+        <div class="card-body">
+            <h5 class="card-text">
+                <strong>Producto:</strong> @ViewBag.Producto <br />
+                <strong>Total Vendido:</strong> @ViewBag.Total
+            </h5>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>¡Ups!</strong> No hay datos disponibles sobre el producto menos vendido.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
+<div class="text-center">
+    <a asp-action="Index" class="btn btn-lg btn-outline-dark shadow-sm">Volver al reporte</a>
+</div>

@@ -147,6 +147,67 @@ namespace Proyecto.Controllers
             return View(kardex);
         }
 
+        //empieza 
+        public async Task<IActionResult> ProductoMasVendido()
+        {
+            var productoMasVendido = await _context.Kardex
+                .GroupBy(k => k.ProductoId)
+                .Select(g => new
+                {
+                    ProductoId = g.Key,
+                    TotalVentas = g.Count()
+                })
+                .OrderByDescending(g => g.TotalVentas)
+                .FirstOrDefaultAsync();
+
+            if (productoMasVendido != null)
+            {
+                var producto = await _context.Productos.FindAsync(productoMasVendido.ProductoId);
+                ViewBag.Producto = producto?.Nombre;
+                ViewBag.Total = productoMasVendido.TotalVentas;
+            }
+            else
+            {
+                ViewBag.Producto = null;
+                ViewBag.Total = 0;
+            }
+
+            return View();
+        }
+        //menos vendido 
+        public async Task<IActionResult> ProductoMenosVendido()
+        {
+            var productoMenosVendido = await _context.Kardex
+                .GroupBy(k => k.ProductoId)
+                .Select(g => new
+                {
+                    ProductoId = g.Key,
+                    TotalVentas = g.Count()
+                })
+                .OrderBy(g => g.TotalVentas)
+                .FirstOrDefaultAsync();
+
+            if (productoMenosVendido != null)
+            {
+                var producto = await _context.Productos.FindAsync(productoMenosVendido.ProductoId);
+                ViewBag.Producto = producto?.Nombre;
+                ViewBag.Total = productoMenosVendido.TotalVentas;
+            }
+            else
+            {
+                ViewBag.Producto = null;
+                ViewBag.Total = 0;
+            }
+
+            return View();
+        }
+
+
+        //termina
+
+
+
+
         // GET: Kardexs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
